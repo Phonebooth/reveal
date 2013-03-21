@@ -49,11 +49,30 @@ Template.deviceMap.rendered = function() {
                 var marker = L.marker([recent.loc.lat, recent.loc.lng]).addTo(map);
                 marker.on('click', function(e) {
                     console.log(e);
+                    $('#device-modal').modal('show');
                 });
             }
         }
     });
 };
+
+Template.deviceMap.events({
+    'click #btn-sound': function() {
+        var device = Session.get("current_device");
+        console.log(device);
+        Meteor.call("sound", device.phone_number);
+    },
+    'click #btn-lock': function() {
+        var device = Session.get("current_device");
+        console.log(device);
+        Meteor.call("lock", device.phone_number);
+    },
+    'click #btn-wipe': function() {
+        var device = Session.get("current_device");
+        console.log(device);
+        Meteor.call("wipe", device.phone_number);
+    }
+});
 
 Template.deviceShow.events({
     'click' : function() {
@@ -62,3 +81,6 @@ Template.deviceShow.events({
 });
 
 L.Icon.Default.imagePath = "/packages/leaflet/images";
+
+
+

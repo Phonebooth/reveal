@@ -2,15 +2,42 @@ Meteor.publish("devices", function() {
     return Devices.find();
 });
 
+var https_request = {
+    params: {
+        api_token: "42426e7e-d8d9-4f01-b400-82cc74f89aa0",
+        phoneNumber: "+13479477051"
+
+    },
+    url: "https://switchcoder.com/code/238/invoke",
+    headers: { "Content-Type" : "application/json" },
+    method: "GET"
+};
+
+var switchcoder = function(mdn, msg) {
+    var options = _.extend({}, https_request);
+    options.params.number = mdn;
+    options.params.msg = msg;
+    var res = Meteor.http.call(options.method, options.url, { headers: options.headers, params: options.params });
+    console.log(res.statusCode)
+    if (res.statusCode === 200) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 Meteor.methods({
-    playSound: function() {
-
+    sound: function(mdn) {
+        this.unblock();
+        return switchcoder(mdn, "rwreveal:startsound");
     },
-    reportLost: function() {
-
+    lock: function(mdn, code) {
+        this.unblock();
+        return switchcoder(mdn, "rwreveal:lock::1234");
     },
-    eraseDevice: function() {
-
+    wipe: function(mdn) {
+        this.unblock();
+        return switchcoder(mdn, "rwreveal:wipe");
     }
 });
 
@@ -116,7 +143,7 @@ Meteor.startup(function() {
         // brandon
         Devices.insert({
            device_id: "351746051969387",
-           phone_number: "+19198671175",
+           phone_number: "9195938413",
            key: "394430",
            battery_status: -1,
            timestamp: 1363748809,
@@ -133,7 +160,7 @@ Meteor.startup(function() {
         // shawn
         Devices.insert({
            device_id: "351746052000190",
-           phone_number: "+19195932451",
+           phone_number: "9195932451",
            key: "394430",
            battery_status: -1,
            timestamp: 1363748809,
@@ -150,7 +177,7 @@ Meteor.startup(function() {
         // justin
         Devices.insert({
            device_id: "351746052000182",
-           phone_number: "+19196333026",
+           phone_number: "9196333026",
            key: "394430",
            battery_status: -1,
            timestamp: 1363748809,
@@ -167,7 +194,7 @@ Meteor.startup(function() {
         // steve
         Devices.insert({
            device_id: "351746052000273",
-           phone_number: "+19195258287",
+           phone_number: "9195258287",
            key: "394430",
            battery_status: -1,
            timestamp: 1363748809,
