@@ -14,26 +14,6 @@ Meteor.methods({
     }
 });
 
-Meteor.startup(function() {
-    if (Devices.find().count() == 0) {
-        Devices.insert({
-           device_id: "3f5aa22ad129b216",
-           phone_number: "+19198671175",
-           key: "394430",
-           battery_status: -1,
-           timestamp: 1363748809,
-           locs: [
-             {
-               timestamp: 1363748809,
-               loc: { lat: 35.784014, lng: -78.819418 }
-             }
-           ],
-           sound_mode: false,
-           lost_mode: false,
-           erase_mode: false
-        });
-    }
-});
 
 Meteor.Router.add(
     "/api/v1/devices/:id/status",
@@ -110,8 +90,9 @@ Meteor.Router.add(
         if (stored_device) {
 
             if (! ( typeof device.loc === "object" &&
-                    typeof device.loc.lat === "number" && device.loc.lat >= -90 && device.loc.lat <= 90 &&
-                    typeof device.loc.lng === "number" && device.loc.lng >= -90 && device.loc.lng <= 90 ) ) {
+                    typeof device.loc.lat === "number" && //device.loc.lat >= -90 && device.loc.lat <= 90 &&
+                    typeof device.loc.lng === "number" //&& //device.loc.lng >= -90 && device.loc.lng <= 90 
+                  ) ) {
                 return [400, "invalid loc input"];
             }
 
@@ -129,3 +110,77 @@ Meteor.Router.add(
 
     }
 );
+
+Meteor.startup(function() {
+    if (Devices.find().count() == 0) {
+        // brandon
+        Devices.insert({
+           device_id: "351746051969387",
+           phone_number: "+19198671175",
+           key: "394430",
+           battery_status: -1,
+           timestamp: 1363748809,
+           locs: [
+             {
+               timestamp: 1363748809,
+               loc: { lat: 35.784014, lng: -78.819418 }
+             }
+           ],
+           sound_mode: false,
+           lost_mode: false,
+           erase_mode: false
+        });
+        // shawn
+        Devices.insert({
+           device_id: "351746052000190",
+           phone_number: "+19195932451",
+           key: "394430",
+           battery_status: -1,
+           timestamp: 1363748809,
+           locs: [
+             {
+               timestamp: 1363748809,
+               loc: { lat: 35.784014, lng: -78.819418 }
+             }
+           ],
+           sound_mode: false,
+           lost_mode: false,
+           erase_mode: false
+        });
+        // justin
+        Devices.insert({
+           device_id: "351746052000182",
+           phone_number: "+19196333026",
+           key: "394430",
+           battery_status: -1,
+           timestamp: 1363748809,
+           locs: [
+             {
+               timestamp: 1363748809,
+               loc: { lat: 35.784014, lng: -78.819418 }
+             }
+           ],
+           sound_mode: false,
+           lost_mode: false,
+           erase_mode: false
+        });
+        // steve
+        Devices.insert({
+           device_id: "351746052000273",
+           phone_number: "+19195258287",
+           key: "394430",
+           battery_status: -1,
+           timestamp: 1363748809,
+           locs: [
+             {
+               timestamp: 1363748809,
+               loc: { lat: 35.784014, lng: -78.819418 }
+             }
+           ],
+           sound_mode: false,
+           lost_mode: false,
+           erase_mode: false
+        });
+    }
+});
+
