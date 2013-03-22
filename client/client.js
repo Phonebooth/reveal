@@ -165,7 +165,13 @@ Template.deviceMap.events({
         var device = Session.get("current_device");
         Meteor.call("lock", device.phone_number);
     },
-    'click #btn-wipe': function() {
+    'click #btn-lock-passcode': function() {
+        var passcode = $('#passcode').val();
+        var device = Session.get("current_device");
+        console.log(passcode);
+        Meteor.call("lock", device.phone_number, passcode);
+    },
+   'click #btn-wipe': function() {
         var device = Session.get("current_device");
         Meteor.call("wipe", device.phone_number);
     },

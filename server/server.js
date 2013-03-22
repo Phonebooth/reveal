@@ -174,7 +174,8 @@ Meteor.startup(function() {
            locs: [
              {
                timestamp: 1363748809,
-               loc: { lat: 35.784014, lng: -78.819418 }
+               loc: { lat: 35.784014, lng: -78.819418,
+               formatted_address: "104 Flintlock Ct, Cary, NC 27513"}
              }
            ],
            sound_mode: false,
@@ -191,7 +192,8 @@ Meteor.startup(function() {
            locs: [
              {
                timestamp: 1363748809,
-               loc: { lat: 35.784014, lng: -78.819418 }
+               loc: { lat: 35.784014, lng: -78.819418,
+               formatted_address: "104 Flintlock Ct, Cary, NC 27513"}
              }
            ],
            sound_mode: false,
@@ -208,7 +210,8 @@ Meteor.startup(function() {
            locs: [
              {
                timestamp: 1363748809,
-               loc: { lat: 35.784014, lng: -78.819418 }
+               loc: { lat: 35.784014, lng: -78.819418,
+               formatted_address: "104 Flintlock Ct, Cary, NC 27513"}
              }
            ],
            sound_mode: false,
@@ -225,7 +228,8 @@ Meteor.startup(function() {
            locs: [
              {
                timestamp: 1363748809,
-               loc: { lat: 35.784014, lng: -78.819418 }
+               loc: { lat: 35.784014, lng: -78.819418,
+               formatted_address: "104 Flintlock Ct, Cary, NC 27513"}
              }
            ],
            sound_mode: false,
