@@ -21,30 +21,73 @@
 -->
 </template>
 
-<template name="deviceIndex">
-<h1>device index</h1>
+<template name="deviceMap">
+{{#constant}}
+<div id="map"></div>
+<div id="header" class="page-header thumbnail floater">
+    <h1><img src="/blackText150.png"/><small class="hide">reveal</small></h1>
+</div>
+<div id="menu" class="btn-group" data-toggle="buttons-checkbox">
+    <button id="btn-history" type="button" class="btn btn-success"><i class="icon-time"></i> Show History</button>
+</div>
+{{/constant}}
+{{#isolate}}
+{{> deviceModal}}
+{{/isolate}}
+{{#isolate}}
+{{#if showHistory}}{{> history}}{{/if}}
+{{/isolate}}
 </template>
 
-<template name="deviceMap">
-<div id="map"></div>
+<template name="deviceModal">
 <div id="device-modal" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3>Device</h3>
+        <h3>{{phoneNumber}}</h3>
     </div>
     <div class="modal-body">
-        <p>awesome sauce</p>
+        {{#isolate}}
+        <img src="/{{batteryStatus}}.png"/>
+        {{/isolate}}
     </div>
+{{#constant}}
     <div class="modal-footer">
-        <a href="#" id="btn-sound" class="btn">Sound</a>
-        <a href="#" id="btn-lock" class="btn">Lock</a>
-        <a href="#" id="btn-wipe" class="btn">Wipe</a>
+        <a href="#" id="btn-sound" class="btn btn-success"><i class="icon-bell"></i> Play Sound</a>
+        <div class="btn-group">
+            <button id ="btn-lock" class="btn btn-warning"><i class="icon-ban-circle"></i> Lost Mode</button>
+            <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><i class="icon-ban-circle"></i><span class="caret"></span></button>
+            <div class="dropdown-menu inset">
+                <div class="input-prepend">
+                    <span class="add-on">#</span>
+                    <input id="passcode" type="password" class="input-small" placeholder="New passcode"/>
+                </div>
+                <!--
+                <li><a tabindex="-1" href="#">Lock phone</a></li>
+                <li><a tabindex="-1" href="#">Lock phone <input id="passcode" type="password" class="input-small" placeholder="New passcode"/></a></li>
+                -->
+            </div>
+        </div>
+        <a href="#" id="btn-wipe" class="btn btn-danger"><i class="icon-repeat"></i> Erase Phone</a>
     </div>
+{{/constant}}
 </div>
 </template>
 
-<template name="deviceShow">
-<div class="container">
-
+<template name="history">
+<div id="history" class="page-header thumbnail floater">
+    <div class="inset">
+        <table class="table table-striped">
+        {{#each locs}}
+            <tr>
+                <td>
+                    <span class="label label-success">{{ts timestamp}}</span>
+                </td>
+                <td>
+                    {{address loc}}
+                </td>
+            </tr>
+        {{/each}}
+        </table>
+    </div>
 </div>
 </template>

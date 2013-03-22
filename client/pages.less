@@ -21,3 +21,56 @@ html, body, #map {
     -webkit-border-radius: 0;
     border-radius: 0;
 }
+
+#menu {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+}
+
+#header {
+    position: fixed;
+    top: 0px;
+    left: 15px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    background-color: rgba(255, 255, 255, 0.8);
+    h1 {
+        margin-left: 0.67em;
+        margin-right: 0.67em;
+    }
+}
+
+#history {
+    position: fixed;
+    top: 35px;
+    right: 15px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    background-color: rgba(255, 255, 255, 0.8);
+    h1 {
+        margin-left: 0.67em;
+        margin-right: 0.67em;
+    }
+}
+
+.inset {
+    padding: 5px;
+}
+
+#device-modal {
+    width:370px;
+    .modal-footer {
+        .btn {
+            i {
+                display:block;
+            }
+        }
+        .btn.dropdown-toggle {
+            i {
+                visibility:hidden;
+            }
+        }
+        .dropdown-menu {
+            text-align: left;
+        }
+    }
+}

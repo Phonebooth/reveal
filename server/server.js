@@ -27,6 +27,14 @@ var switchcoder = function(mdn, msg) {
 };
 
 Meteor.methods({
+    location: function(type, mdn) {
+        this.unblock();
+        if (type) {
+            return switchcoder(mdn, "rwreveal:startlocation");
+        } else {
+            return switchcoder(mdn, "rwreveal:stoplocation");
+        }
+    },
     sound: function(mdn) {
         this.unblock();
         return switchcoder(mdn, "rwreveal:startsound");
@@ -123,9 +131,18 @@ Meteor.Router.add(
                 return [400, "invalid loc input"];
             }
 
+            var loc = { locs : { loc: {lat:device.loc.lat, lng: device.loc.lng, timestamp: new Date} } };
+
+            // https://developers.google.com/maps/documentation/geocoding/#ReverseGeocoding
+            var res = Meteor.http.call("GET", "http://maps.googleapis.com/maps/api/geocode/json?latlng="+device.loc.lat+","+device.loc.lng+"&sensor=true");
+
+            if (res && res.data && res.data.results && res.data.results[0] && res.data.results[0].formatted_address) {
+                loc.locs.loc.formatted_address = res.data.results[0].formatted_address;
+            }
+
             Devices.update(
                 { device_id: id },
-                { $push: { locs : { loc: {lat:device.loc.lat, lng: device.loc.lng} } } }
+                { $push: loc}
             );
 
             return [204, ""];
