@@ -26,13 +26,14 @@ Meteor.pages({
 Template.history.locs = function() {
     var device = Session.get("current_device");
     if (device) {
-        return _.initial(device.locs);
+        return _.first(_.initial(device.locs).reverse(), 10);
     }
     return [];
 };
 
 Template.history.ts = function(ts) {
-    return moment.unix(ts).startOf("hour").fromNow();
+    //return moment.unix(ts).startOf("minute").fromNow();
+    return moment().calendar();
 };
 
 Template.history.address = function(loc) {
@@ -144,7 +145,7 @@ Template.deviceMap.rendered = function() {
                     currentPoint.addLayer(marker);
                 }
 
-    //            Meteor.call("location", true, device.phone_number);
+                Meteor.call("location", true, device.phone_number);
     //            $(window).bind("beforeunload", function() {
     //                Meteor.call("location", false, device.phone_number);
     //            });

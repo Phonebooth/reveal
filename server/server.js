@@ -137,7 +137,14 @@ Meteor.Router.add(
             var res = Meteor.http.call("GET", "http://maps.googleapis.com/maps/api/geocode/json?latlng="+device.loc.lat+","+device.loc.lng+"&sensor=true");
 
             if (res && res.data && res.data.results && res.data.results[0] && res.data.results[0].formatted_address) {
-                loc.locs.loc.formatted_address = res.data.results[0].formatted_address;
+                var reverse_geocode = res.data.results[0].formatted_address;
+                if (_.last(stored_device.locs).loc.formatted_address === reverse_geocode) {
+                    console.log("repeat location");
+                    return [204, ""];
+                } else {
+                    console.log('new location');
+                    loc.locs.loc.formatted_address = reverse_geocode;
+                }
             }
 
             Devices.update(
